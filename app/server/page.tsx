@@ -1,29 +1,22 @@
-import Link from "next/link";
-import { use } from "react";
-
 async function getData() {
-  console.log("Fetchind ServerSideProps Data Now");
-  return await (
-    await fetch("https://rickandmortyapi.com/api/character", {
-      cache: "no-cache",
-    })
-  ).json();
+  const res = await fetch("https://rickandmortyapi.com/api/character");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
 }
 
-export default function Server() {
+export default async function Server() {
   // pre-renders this page on each request
-  // same code as staticprops/page.tsx (getStaticProps) but the data will not be cached
-  const characters: Characters = use(getData());
+  const characters: Characters = await getData();
   return (
     <div>
       <h1 className="font-bold mb-4">Server fetching (getServerSideProps)</h1>
       {characters.results?.map((c) => (
         <ul key={c.id}>
-          <Link
-            href={`/staticprops/${c.name}`.replace(/\s+/g, "-").toLowerCase()}
-          >
-            <li>{c.name}</li>
-          </Link>
+          <li>{c.name}</li>
         </ul>
       ))}
     </div>

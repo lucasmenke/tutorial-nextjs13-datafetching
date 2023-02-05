@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <div className="flex flex-row justify-between mb-16">
     {routes.map(r => (
-        <Link key={r.name} href={r.path} className="font-bold text-violet-700 mx-3 text-xl">{r.name}</Link>
+        <Link key={r.name} href={r.path} className="font-bold text-violet-700 mx-3 text-xl hover:scale-105 transition-all ">{r.name}</Link>
     ))}
     </div>
   )

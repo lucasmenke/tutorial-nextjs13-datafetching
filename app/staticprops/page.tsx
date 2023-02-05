@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { use } from "react";
 
 async function getData() {
@@ -17,11 +16,7 @@ export default function Staticprops() {
       <h1 className="font-bold mb-4">Build time fetching (getStaticProps)</h1>
       {characters.results?.map((c) => (
         <ul key={c.id}>
-          <Link
-            href={`/staticprops/${c.name}`.replace(/\s+/g, "-").toLowerCase()}
-          >
-            <li>{c.name}</li>
-          </Link>
+          <li>{c.name}</li>
         </ul>
       ))}
     </div>
